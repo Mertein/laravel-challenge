@@ -1,3 +1,11 @@
+# LaravelChallenge
+
+## Challenge Description
+
+This is the Laravel challenge for ADOCLIC. You can find the complete instructions at the following link:
+
+[Challenge Instructions](https://github.com/adoclicdotcom/prueba_laravel)
+
 # Guia para la instalacion, uso de la Api y Test.
 
 ## Instalación
