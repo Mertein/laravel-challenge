@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\EntityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +16,5 @@ use App\Http\Controllers\ApiController;
 
 
 
-Route::get('/', [ApiController::class, 'index']);
-
-
-
-
+Route::get('/', [EntityController::class, 'index']);
 

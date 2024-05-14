@@ -9,10 +9,12 @@
 <body>
 <div class='container' style="height: 100%; width: max-content; display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <h1 class='text-center' style='color:white;'>Table of Entities</h1>
+    <button class='btn btn-warning' id="insert-data-btn">Test Fetch Data and Insert to database</button>
+
     <div class="btn-group" style="display: flex; flex-direction: row; justify-content: space-evenly; gap: 32px; padding: 8px;" role="group" aria-label="Filtrar entidades">
-        <a href="{{ url('/api') }}" class="btn btn-primary">All Entities</a>
-        <a href="{{ url('/api/Animals') }}" class="btn btn-secondary">Animals</a>
-        <a href="{{ url('/api/Security') }}" class="btn btn-secondary">Security</a>
+        <a href="{{ url('/api') }}" target="_blank" class="btn btn-primary">All Entities</a>
+        <a href="{{ url('/api/Animals') }}" target="_blank"  class="btn btn-secondary">Animals</a>
+        <a href="{{ url('/api/Security') }}" target="_blank" class="btn btn-secondary">Security</a>
     </div>
 
     <table class="table table-dark table-striped">
@@ -37,9 +39,15 @@
         @endforeach
         </tbody>
     </table>
+    {{ $entities->links() }}
+
+    <!-- Footer -->
+    <footer class="mt-5 text-center text-white">
+        <p>Created with ♥ by Mertein</p>
+    </footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>
 
@@ -53,4 +61,31 @@
         background-color: rgb(47,79,79)
     }
 </style>
+
+<!-- Styles -->
+<!-- Scripts -->
+<script>
+    document.getElementById('insert-data-btn').addEventListener('click', function() {
+        fetch('{{ route("insert-data") }}', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload()
+                alert(data.message);
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al realizar la solicitud');
+        });
+    });
+</script>
 

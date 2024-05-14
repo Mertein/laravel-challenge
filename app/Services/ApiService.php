@@ -10,6 +10,9 @@ class ApiService
 {
     public function fetchDataAndInsertEntities()
     {
+
+        //TODO: Aqui hariamos un fetch si la api funcionaria y convertiriamos la respuesta json a un array  pero como no funciona la api, lo haremos manualmente con un factory
+        /*
         $response = Http::get('https://api.publicapis.org/entries');
         $data = $response->json();
 
@@ -23,6 +26,11 @@ class ApiService
                 ]);
             }
         }
+        */
+
+        //TODO: Factory to replace fetch api and return data to controller
+        $data = Entity::factory()->count(5)->create();
+        return $data;
     }
 
     private function getCategoryId($categories)

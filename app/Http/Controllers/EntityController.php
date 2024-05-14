@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Entity;
 use Illuminate\Http\Request;
+use App\Services\ApiService;
 
-class ApiController extends Controller
+class EntityController extends Controller
 {
+
+    private ApiService $apiService;
+    public function __construct(ApiService $apiService) {
+        $this->apiService = $apiService;
+    }
 
     public function index()
     {
-        $entities = Entity::all();
+        $entities = Entity::paginate(10);
         return view('welcome', compact('entities'));
     }
 
@@ -67,5 +73,16 @@ class ApiController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function insertData(Request $request)
+    {
+        try {
+            $insertedData = $this->apiService->fetchDataAndInsertEntities();
+            return response()->json(['success' => true, 'message' => 'Datos insertados correctamente', 'data' => $insertedData]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error al insertar datos: ' . $e->getMessage()], 500);
+        }
+    }
+
 
 }

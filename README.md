@@ -4,6 +4,7 @@
 
 -   Requerimientos
     Php version > 8.1.10
+
     Usar Laragon, Xampp o WampServer.
 
 Para instalar y ejecutar esta aplicación, sigue estos pasos:
@@ -99,7 +100,7 @@ Si la categoría especificada existe en la base de datos, se mostrarán solo las
 
 ## Running Tests
 
-To run tests, run the following command
+Para ejecutar las pruebas con PhpUnit, ejecute el siguiente comando
 
 ```bash
 npm run test
@@ -107,5 +108,4 @@ npm run test
 
 ### Postman Collection
 
-In the file folder \_postman/Laravel-Challenge.postman_collection.json
-you can test the api response with postman.
+En la carpeta \_postman/Laravel-Challenge.postman_collection.json puedes probar la respuesta de la api con postman.

@@ -2,42 +2,23 @@
 
 namespace Tests\Unit\Services;
 
+use App\Models\Entity;
 use App\Services\ApiService;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class ApiServiceTest extends TestCase
 {
+    //TODO: Verifica si se crearon los 5 registros en la base de datos
     public function testFetchDataAndInsertEntities()
     {
-        Http::fake([
-            'https://api.publicapis.org/entries' => Http::response([
-                'entries' => [
-                    [
-                        'API' => 'Example API',
-                        'Description' => 'This is an example API',
-                        'Link' => 'https://example.com/api',
-                        'Categories' => ['Animals']
-                    ],
-                    [
-                        'API' => 'Another API',
-                        'Description' => 'This is another example API',
-                        'Link' => 'https://example.com/another-api',
-                        'Categories' => ['Security']
-                    ]
-                ]
-            ], 200)
-        ]);
-
-        // Creamos una instancia del servicio
+        // Crea una instancia del servicio ApiService
         $apiService = new ApiService();
 
-        // Llamamos al método para probar
-        $apiService->fetchDataAndInsertEntities();
+        // Llama al método fetchDataAndInsertEntities
+       $data =  $apiService->fetchDataAndInsertEntities();
 
-        // Verificamos que las entidades se hayan insertado correctamente en la base de datos
-        $this->assertDatabaseHas('entities', ['api' => 'Example API']);
-        $this->assertDatabaseHas('entities', ['api' => 'Another API']);
+        // Verifica si se crearon los 5 registros en la base de datos
+        $this->assertCount(5, $data);
     }
 }
-
